@@ -1,0 +1,94 @@
+
+Redes de Computadoras I
+Proyecto 2
+16/01/2014
+Autores :
+	Juan Pereira   09-11173
+	Erick Marrero  09-10981
+
+Descripcion:
+
+  El proyecto 2, servidor de archivos en red con RMI consiste en poner
+en funcionamiento un servidor centralizado de archivos para que los clientes
+del mismo puedan tener acceso a todas sus funciones. Cada cliente debe tener 
+un 'usuario' y 'contraseña' para acceder al servidor, para ello se hace un
+servidor sencillo de autenticacion para almacenar los usuarios que puedan 
+entrar al servidor.
+
+  En la carpeta del proyecto, se encuentra un 'makefile' para compilar todos
+los archivos que generen los .class necesarios para poner en funcionamiento
+el programa deseado. Para generarlo se hace el comando 'make'.
+
+  Como se trata de dos servidores (centralizado y de autenticacion) juntos a
+los clientes, los archivos de cada uno de ellos pueden estar en cualquier parte,
+pero para su correcta ejecucion, deben estar juntos los siguientes archivos:
+
+
+  Servidor
+Autenticacion:	a_rmifs.java a_rmifs.class
+		Validar_Interface.java Validar_Interface.class
+		Validar_InterfaceImpl.java Validar_InterfaceImpl.class
+		archivos: usuarios y contraseñas (OBLIGATORIO)
+
+La primera ejecucion debe ser con:
+>>java a_rmifs -f usuarios -p puerto
+
+
+  Servidor
+Centralizado:	s_rmifs.java s_rmifs.class
+		Comandos.java Comandos.class
+		ComandosImpl.java ComandosImpl.class
+		Validar_Interface.java Validar_Interface.class
+
+La segunda ejecucion debe ser con:
+>>java s_rmifs -l puertolocal -h host -r puerto
+
+  Cliente:  c_rmifs.java c_rmifs.class
+	    Comandos.java Comandos.class
+	    archivos: usuario y de comandos(NO es obligatorio)
+	    
+Y la tercera ejecucion debe ser con:
+>>java c_rmifs [-f usuarios] -m servidor -p puerto [-c comandos]
+
+Descripcion de los archivos:
+  
+  a_rmifs.java: Permite crear el puerto donde estara el servidor
+		de autentacion.
+		
+  Validar_Interface.java: Interface del servidor de autenticacion
+			   que contiene las funciones remotas
+
+  Validar_InterfaceImpl.java: Implementacion de la interface:
+			      'Validar_Interface.java'
+		
+  s_rmifs.java: Permite crear el puerto donde estara el servidor
+		centralizado y se conecta al puerto donde esta el
+		servidor de autentacion. Asimismo, permite el ingreso
+		de comandos por teclado que solo este puede ejecutar.
+		(log y sal)
+
+  Comandos.java: Interface del servidor centralizado que contiene
+		  las funciones remotas que ofrecera al cliente.
+
+  ComandosImpl.java: Implementacion de la interface:
+		      'Comandos.java'
+
+  c_rmifs.java: Realiza la conexion al servidor centralizado y permite
+		la interaccion con el usuario que igresara los comandos 
+		por consola.
+
+		      
+
+		
+		
+
+
+
+
+
+
+
+  
+  
+  
+  
